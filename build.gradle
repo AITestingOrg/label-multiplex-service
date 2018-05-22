@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.2.RELEASE'
+        springBootVersion = '2.0.2.RELEASE'
         orgAspectjVerision = '1.9.1'
 	}
 	repositories {
@@ -33,25 +33,25 @@ ext {
 }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('io.pivotal.spring.cloud:spring-cloud-services-starter-circuit-breaker')
-	compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
-	compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix')
-	compile('org.springframework.cloud:spring-cloud-starter-netflix-ribbon')
-	compile "org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}"
-	compile "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
-	compile 'org.springframework:spring-orm'
-	compile 'org.hibernate:hibernate-entitymanager'
-	compile "org.springframework.boot:spring-boot-starter-validation:${springBootVersion}"
-	compile "org.springframework.data:spring-data-jpa:"
-	compile 'org.hibernate:hibernate-core'
-	compile 'javax.xml.bind:jaxb-api'
-	compile 'org.postgresql:postgresql'
-	compile 'mysql:mysql-connector-java'
+    compile('org.springframework.boot:spring-boot-starter-data-mongodb')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('io.pivotal.spring.cloud:spring-cloud-services-starter-circuit-breaker')
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix')
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-ribbon')
+    compile "org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+    compile 'org.springframework:spring-orm'
+    compile 'org.hibernate:hibernate-entitymanager'
+    compile "org.springframework.boot:spring-boot-starter-validation:${springBootVersion}"
+    compile "org.springframework.data:spring-data-jpa:"
+    compile 'org.hibernate:hibernate-core'
+    compile 'javax.xml.bind:jaxb-api'
+    compile 'org.postgresql:postgresql'
+    compile 'mysql:mysql-connector-java'
     compile 'org.springframework:spring-aop'
     compile "org.aspectj:aspectjtools:${orgAspectjVerision}"
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
 dependencyManagement {
