@@ -6,6 +6,7 @@ import org.aist.aide.labelmultiplexer.service.repositories.Repo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -19,7 +20,9 @@ public class LabelService<T extends Label> {
     }
 
     public List<T> getAll() {
-        return repo.findAll();
+        var list = new ArrayList<T>();
+        repo.findAll().forEach(t -> list.add(t));
+        return list;
     }
 
     public T get(long id) throws NotFoundException {

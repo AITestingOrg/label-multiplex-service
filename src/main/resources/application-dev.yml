@@ -1,8 +1,6 @@
 spring:
-  application:
-    name: labelmultiplexer
   datasource:
-    url: jdbc:postgresql://localhost:5432/labels
+    url: jdbc:postgresql://postgres:5432/labels
     username: postgres
     password: postgres
     platform: POSTGRESQL
@@ -10,13 +8,13 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
-    show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-    register-with-eureka: false
+      defaultZone: http://discoveryservice:8761/eureka/
+    fetch-registry: false
 logging:
   level:
     org:

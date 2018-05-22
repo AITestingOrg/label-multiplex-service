@@ -8,6 +8,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "in_label")
 public class InLabel extends Label {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected long id;
+
+
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "out_label_id")
     @OnDelete(action = OnDeleteAction.CASCADE)

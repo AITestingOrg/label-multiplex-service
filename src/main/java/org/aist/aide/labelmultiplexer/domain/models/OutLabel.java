@@ -1,12 +1,14 @@
 package org.aist.aide.labelmultiplexer.domain.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "out_label")
 public class OutLabel extends Label {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected long id;
+
     @Column(name = "description")
     private String description;
 
