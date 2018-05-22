@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "standard_label")
+@Table(name = "out_label")
 public class OutLabel extends Label {
     @Column(name = "description")
     private String description;

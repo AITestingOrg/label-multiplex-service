@@ -6,7 +6,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "cat_label")
+@Table(name = "in_label")
 public class InLabel extends Label {
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "out_label_id")
