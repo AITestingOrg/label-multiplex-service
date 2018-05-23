@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/labels
+    username: postgres
+    password: postgres
+    platform: POSTGRESQL
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discoveryservice:8761/eureka/
+    fetch-registry: false
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type: TRACE

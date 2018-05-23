@@ -1,12 +1,14 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.2.RELEASE'
+        springBootVersion = '2.0.1.RELEASE'
+        orgAspectjVerision = '1.9.1'
 	}
 	repositories {
 		mavenCentral()
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.2'
 	}
 }
 
@@ -14,9 +16,11 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: "jacoco"
+apply plugin: 'checkstyle'
 
 group = 'org.aist.aide'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 sourceCompatibility = 10
 
 repositories {
@@ -32,13 +36,27 @@ ext {
 }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('io.pivotal.spring.cloud:spring-cloud-services-starter-circuit-breaker')
-	compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
-	compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix')
-	compile('org.springframework.cloud:spring-cloud-starter-netflix-ribbon')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('io.pivotal.spring.cloud:spring-cloud-services-starter-circuit-breaker')
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix')
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-ribbon')
+    compile "org.springframework.boot:spring-boot-starter-data-rest:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-starter-cloud-connectors:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+    compile 'org.springframework:spring-orm'
+    compile 'org.hibernate:hibernate-entitymanager'
+    compile "org.springframework.boot:spring-boot-starter-validation:${springBootVersion}"
+    compile "org.springframework.data:spring-data-jpa"
+    compile 'org.hibernate:hibernate-core'
+    compile 'javax.xml.bind:jaxb-api'
+    compile 'org.postgresql:postgresql'
+    compile 'org.springframework:spring-aop'
+    compile "org.aspectj:aspectjtools:${orgAspectjVerision}"
+    compile 'javax.xml.bind:jaxb-api'
+    compile 'mysql:mysql-connector-java'
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
 dependencyManagement {
@@ -47,3 +65,42 @@ dependencyManagement {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
 }
+
+checkstyle {
+    toolVersion = "8.7"
+    configFile = new File(rootDir, "checkstyle.xml")
+    maxWarnings = 0
+    maxErrors = 0
+}
+
+checkstyleMain {
+    source = fileTree('src/main') {
+        excludes = ['*.yml']
+    }
+}
+checkstyleTest {
+    source = fileTree('src/test') {
+        excludes = ['*.yml']
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.1"
+}
+
+jacocoTestReport {
+    reports {
+        html.destination file("${buildDir}/jacocoHtml")
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.85
+            }
+        }
+    }
+}
+test.finalizedBy(jacocoTestCoverageVerification)
