@@ -133,6 +133,26 @@ public class InLabelCrudIntegrationTest {
     }
 
     @Test
+    public void givenLabelsExist_whenGetByName_LabelIsRetrieved() {
+        // act
+        var createdLabel = new InLabel("Test");
+        repo.save(new InLabel("Hello"));
+        repo.save(createdLabel);
+        repo.save(new InLabel("Fault"));
+
+        // assert
+        var label = inLabelController.getByName("Test").getBody();
+        Assert.assertEquals("Test", label.getName());
+    }
+
+    @Test
+    public void givenNoLabelsExist_whenGetByName_NotFoundReturned() {
+        // assert
+        var label = inLabelController.getByName("Hello, World!");
+        Assert.assertEquals(HttpStatus.NOT_FOUND, label.getStatusCode());
+    }
+
+    @Test
     public void givenLabelsExist_whenGetAll_LabelsAreRetrieved() {
         // act
         repo.save(new InLabel("Test"));

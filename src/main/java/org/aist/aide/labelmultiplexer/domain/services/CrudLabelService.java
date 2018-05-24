@@ -8,10 +8,10 @@ import org.aist.aide.labelmultiplexer.domain.exceptions.NotFoundException;
 import org.aist.aide.labelmultiplexer.domain.models.Label;
 import org.springframework.data.repository.CrudRepository;
 
-public abstract class LabelService<T extends Label> {
-    private CrudRepository<T, Long> labelRepository;
+public class CrudLabelService<T extends Label> {
+    protected CrudRepository<T, Long> labelRepository;
 
-    public LabelService(CrudRepository<T, Long> labelRepository) {
+    public CrudLabelService(CrudRepository<T, Long> labelRepository) {
         this.labelRepository = labelRepository;
     }
 
