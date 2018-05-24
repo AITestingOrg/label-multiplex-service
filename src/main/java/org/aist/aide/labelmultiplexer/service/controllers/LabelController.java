@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 public abstract class LabelController<T extends Label> {
-    private LabelService<T> labelService;
+    protected LabelService<T> labelService;
 
     protected LabelController(@Autowired LabelService<T> labelService) {
         this.labelService = labelService;
