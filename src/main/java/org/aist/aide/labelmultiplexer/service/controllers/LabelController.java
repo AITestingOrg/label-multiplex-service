@@ -1,5 +1,8 @@
 package org.aist.aide.labelmultiplexer.service.controllers;
 
+import java.util.List;
+import javax.validation.ValidationException;
+
 import org.aist.aide.labelmultiplexer.domain.exceptions.NotFoundException;
 import org.aist.aide.labelmultiplexer.domain.models.Label;
 import org.aist.aide.labelmultiplexer.domain.services.LabelService;
@@ -8,13 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.ValidationException;
-import java.util.List;
-
 public abstract class LabelController<T extends Label> {
     private LabelService<T> labelService;
 
-    public LabelController(@Autowired LabelService<T> labelService) {
+    protected LabelController(@Autowired LabelService<T> labelService) {
         this.labelService = labelService;
     }
 
@@ -26,8 +26,8 @@ public abstract class LabelController<T extends Label> {
     @RequestMapping("{id}")
     public ResponseEntity<T> get(@PathVariable long id) {
         try {
-            return new ResponseEntity(labelService.get(id), HttpStatus.OK);
-        } catch(NotFoundException e) {
+            return new ResponseEntity<>(labelService.get(id), HttpStatus.OK);
+        } catch (NotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -37,7 +37,7 @@ public abstract class LabelController<T extends Label> {
         try {
             labelService.save(label);
             return new ResponseEntity<>(label.getId(), HttpStatus.OK);
-        } catch(ValidationException e) {
+        } catch (ValidationException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -47,19 +47,19 @@ public abstract class LabelController<T extends Label> {
         try {
             labelService.update(label);
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch(ValidationException e) {
+        } catch (ValidationException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } catch(NotFoundException e) {
+        } catch (NotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @RequestMapping(path="/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity delete(@PathVariable long id) {
         try {
             labelService.delete(id);
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch(NotFoundException e) {
+        } catch (NotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

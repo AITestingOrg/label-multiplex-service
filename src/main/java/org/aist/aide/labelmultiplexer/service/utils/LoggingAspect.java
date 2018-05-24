@@ -19,7 +19,7 @@ public class LoggingAspect {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
 
-        Object retVal = joinPoint.proceed();
+        final Object retVal = joinPoint.proceed();
 
         stopWatch.stop();
 

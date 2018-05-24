@@ -1,12 +1,12 @@
 package org.aist.aide.labelmultiplexer.domain.services;
 
-import org.aist.aide.labelmultiplexer.domain.exceptions.NotFoundException;
-import org.aist.aide.labelmultiplexer.domain.models.Label;
-import org.springframework.data.repository.CrudRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+
+import org.aist.aide.labelmultiplexer.domain.exceptions.NotFoundException;
+import org.aist.aide.labelmultiplexer.domain.models.Label;
+import org.springframework.data.repository.CrudRepository;
 
 public abstract class LabelService<T extends Label> {
     private CrudRepository<T, Long> labelRepository;
@@ -49,7 +49,7 @@ public abstract class LabelService<T extends Label> {
 
     private T getObjWithCheck(long id) throws NotFoundException {
         var optional = labelRepository.findById(id);
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             return optional.get();
         }
         throw new NotFoundException(String.format("Could not find anything with id %s", id));
