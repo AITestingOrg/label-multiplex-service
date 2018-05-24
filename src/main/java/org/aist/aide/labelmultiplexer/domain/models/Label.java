@@ -7,7 +7,7 @@ public abstract class Label extends AuditModel {
     protected long id;
 
     @NotNull
-    @Column(name = "name", unique = true)
+    @Column(name = "`name`", unique = true)
     protected String name;
 
     public Label(@NotNull String name) {
