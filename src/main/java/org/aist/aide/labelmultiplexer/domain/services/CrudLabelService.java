@@ -1,27 +1,23 @@
 package org.aist.aide.labelmultiplexer.domain.services;
 
-import org.aist.aide.labelmultiplexer.domain.exceptions.NotFoundException;
-import org.aist.aide.labelmultiplexer.domain.models.Label;
-import org.aist.aide.labelmultiplexer.service.repositories.Repo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-@Service
-public class LabelService<T extends Label> {
+import org.aist.aide.labelmultiplexer.domain.exceptions.NotFoundException;
+import org.aist.aide.labelmultiplexer.domain.models.Label;
+import org.springframework.data.repository.CrudRepository;
 
-    private Repo<T, Long> repo;
+public class CrudLabelService<T extends Label> {
+    protected CrudRepository<T, Long> labelRepository;
 
-    public LabelService(@Autowired Repo<T, Long> repo) {
-        this.repo = repo;
+    public CrudLabelService(CrudRepository<T, Long> labelRepository) {
+        this.labelRepository = labelRepository;
     }
 
     public List<T> getAll() {
         var list = new ArrayList<T>();
-        repo.findAll().forEach(t -> list.add(t));
+        labelRepository.findAll().forEach(t -> list.add(t));
         return list;
     }
 
@@ -30,15 +26,15 @@ public class LabelService<T extends Label> {
     }
 
     public void save(T obj) {
-        repo.save(obj);
+        labelRepository.save(obj);
     }
 
     public void update(T obj) throws NotFoundException {
-        doActionWithCheck(obj, t -> repo.save(t), obj.getId());
+        doActionWithCheck(obj, t -> labelRepository.save(t), obj.getId());
     }
 
     public void delete(long id) throws NotFoundException {
-        doActionWithCheck(t -> repo.delete(t), id);
+        doActionWithCheck(t -> labelRepository.delete(t), id);
     }
 
     private void doActionWithCheck(Consumer<T> func, long id) throws NotFoundException {
@@ -52,8 +48,8 @@ public class LabelService<T extends Label> {
     }
 
     private T getObjWithCheck(long id) throws NotFoundException {
-        var optional = repo.findById(id);
-        if(optional.isPresent()) {
+        var optional = labelRepository.findById(id);
+        if (optional.isPresent()) {
             return optional.get();
         }
         throw new NotFoundException(String.format("Could not find anything with id %s", id));

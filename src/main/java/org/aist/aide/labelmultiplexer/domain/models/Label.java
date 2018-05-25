@@ -3,7 +3,10 @@ package org.aist.aide.labelmultiplexer.domain.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-public abstract class Label extends AuditModel {
+@MappedSuperclass
+public class Label extends AuditModel {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
 
     @NotNull
@@ -12,6 +15,9 @@ public abstract class Label extends AuditModel {
 
     public Label(@NotNull String name) {
         this.name = name;
+    }
+
+    public Label() {
     }
 
     public String getName() {
