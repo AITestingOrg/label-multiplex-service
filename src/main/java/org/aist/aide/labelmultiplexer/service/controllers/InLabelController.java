@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/in-label")
 public class InLabelController extends LabelController<InLabel> {
     protected InLabelService crudLabelService;
+
     public InLabelController(@Autowired InLabelService inLabelService) {
         super(inLabelService);
         crudLabelService = inLabelService;
