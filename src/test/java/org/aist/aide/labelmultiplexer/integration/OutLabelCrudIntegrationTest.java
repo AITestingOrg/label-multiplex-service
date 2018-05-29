@@ -1,5 +1,9 @@
 package org.aist.aide.labelmultiplexer.integration;
 
+import org.aist.aide.labelmultiplexer.domain.models.OutLabel;
+import org.aist.aide.labelmultiplexer.service.controllers.OutLabelController;
+import org.aist.aide.labelmultiplexer.service.repositories.OutLabelRepository;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,15 +13,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import org.aist.aide.labelmultiplexer.domain.models.OutLabel;
-import org.aist.aide.labelmultiplexer.service.controllers.OutLabelController;
-import org.aist.aide.labelmultiplexer.service.repositories.OutLabelRepository;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class OutLabelCrudIntegrationTest {
     @Autowired
-    private OutLabelController OutLabelController;
+    private OutLabelController outLabelController;
 
     @Autowired
     private OutLabelRepository repo;
@@ -30,7 +30,7 @@ public class OutLabelCrudIntegrationTest {
     @Test
     public void givenNoLabels_whenCreateOutLabel_LabelIsCreated() {
         // act
-        var id = OutLabelController.create(new OutLabel("Test")).getBody();
+        var id = outLabelController.create(new OutLabel("Test")).getBody();
 
         // assert
         var label = repo.findById(id).get();
@@ -40,10 +40,10 @@ public class OutLabelCrudIntegrationTest {
     @Test
     public void givenNoLabels_whenCreateOutLabel_ReturnsValidId() {
         // act
-        var id = OutLabelController.create(new OutLabel("Test")).getBody();
+        var id = outLabelController.create(new OutLabel("Test")).getBody();
 
         // assert
-        var label = OutLabelController.get(id).getBody();
+        var label = outLabelController.get(id).getBody();
         Assert.assertEquals("Test", label.getName());
     }
 
@@ -54,7 +54,7 @@ public class OutLabelCrudIntegrationTest {
         repo.save(createdLabel);
 
         // act
-        OutLabelController.update(new OutLabel(createdLabel.getId(), "Hello, World!", null));
+        outLabelController.update(new OutLabel(createdLabel.getId(), "Hello, World!", null));
 
         // assert
         var label = repo.findById(createdLabel.getId()).get();
@@ -64,7 +64,7 @@ public class OutLabelCrudIntegrationTest {
     @Test
     public void givenNoLabelExists_whenUpdateOutLabel_NotFoundReturned() {
         // act
-        var result = OutLabelController.update(new OutLabel(1, "Hello, World!", null));
+        var result = outLabelController.update(new OutLabel(1, "Hello, World!", null));
 
         // assert
         Assert.assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
@@ -77,7 +77,7 @@ public class OutLabelCrudIntegrationTest {
         repo.save(createdLabel);
 
         // act
-        OutLabelController.delete(createdLabel.getId());
+        outLabelController.delete(createdLabel.getId());
 
         // assert
         var labels = repo.findAll().iterator();
@@ -87,7 +87,7 @@ public class OutLabelCrudIntegrationTest {
     @Test
     public void givenNoLabelExists_whenDeletingOutLabel_NotFoundRetrieved() {
         // act
-        var result = OutLabelController.delete(1);
+        var result = outLabelController.delete(1);
 
         // assert
         Assert.assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
@@ -102,14 +102,14 @@ public class OutLabelCrudIntegrationTest {
         repo.save(new OutLabel("Fault"));
 
         // assert
-        var label = OutLabelController.get(createdLabel.getId()).getBody();
+        var label = outLabelController.get(createdLabel.getId()).getBody();
         Assert.assertEquals("Test", label.getName());
     }
 
     @Test
     public void givenNoLabelsExist_whenGetById_NotFoundReturned() {
         // assert
-        var label = OutLabelController.get(1);
+        var label = outLabelController.get(1);
         Assert.assertEquals(HttpStatus.NOT_FOUND, label.getStatusCode());
     }
 
@@ -121,14 +121,14 @@ public class OutLabelCrudIntegrationTest {
         repo.save(new OutLabel("Test3"));
 
         // assert
-        var label = OutLabelController.getAll();
+        var label = outLabelController.getAll();
         Assert.assertEquals(3, label.getBody().size());
     }
 
     @Test
     public void givenNoLabelsExist_whenGetAll_EmptyListRetrieved() {
         // assert
-        var label = OutLabelController.getAll();
+        var label = outLabelController.getAll();
         Assert.assertEquals(0, label.getBody().size());
     }
 }
