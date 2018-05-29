@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import org.aist.aide.labelmultiplexer.domain.exceptions.NotFoundException;
+import org.aist.aide.formexpert.common.exceptions.NotFoundException;
 import org.aist.aide.labelmultiplexer.domain.models.Label;
 import org.springframework.data.repository.CrudRepository;
 
