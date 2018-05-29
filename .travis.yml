@@ -7,7 +7,7 @@ before_install:
 install: ". ./install-jdk.sh -F 10 -L GPL"
 before_script:
 - sudo service postgresql stop
-- docker-compose -f docker-compose.yml up -d
+- docker-compose up -d
 env:
   global:
   - secure: WLoCzW+M+8kzT83QFIM728Q5vyy3nahIQVvudotrgi9z7zwNvN4G/JauQtvGRErIXR9/Luk93qEhl6EZ+/O4ebDVdTD2Qthtx41mSKupSaIvoew2HWGqWCBoykOzKDBSf83ZW9L/qOWfqG4RYegS359G9VC/JCvR3LzGvWF+pOSuztFvilJHGUpLjwv4A1ZURzmEUfaIg3uj6tccAFXtDspONUqNjn4WhDjE4N8pagLpJdB4i9qxGuWl9qJZbXanC67oQNU+8sm3MDWwNckRC+y17RqPl8znd3B+288iq3ZNnAgbO7lnKTmMnw9Au0kfNBPGTfunpDYKkXQXdGbDmRvYQ6Cbfjq0e/42vdD0SaqkS3/2i2V1Ca35B6RFZR1nOUL2fAfjRe6FK9Uevmg2JQiUxXDSAe3FSwG/hrK1odqNCdhJMSkE1ehfuX4mH6jQ3JP4oV6c8K4X2MrKtnOnAjGy2otDkKB3pHO1D+RG6FvBOfpr2N+c9m8qh/bG5k5Oh4hhsghYlYG/SCz71z+6QLeLu5rKE+jl2qWTn55iifB3Tbeh+ZYqeMLmXHM3pkDy50oCjdkc8pzUkJak5Mv/q60pQsbLSVf/8FZke606CQddbCvtVZc7kMqalxdibbj2nBXQyb9644GMOkqsazj/jyDc/P1CHasrXgd2VXMPs7g=

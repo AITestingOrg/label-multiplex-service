@@ -11,6 +11,7 @@ services:
       - postgres
     depends_on:
       - postgres
+
   postgres:
     image: postgres
     restart: always
@@ -23,7 +24,8 @@ services:
       - '5432:5432'
     volumes:
       - ./db_volume:/var/lib/postgresql
+
   discoveryservice:
     image: springcloud/eureka
     ports:
-- "8761:8761"
+      - "8761:8761"
