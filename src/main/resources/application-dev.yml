@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://postgres:5432/labels
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://localhost:5432/labels
+    username: test
+    password: test
     platform: POSTGRESQL
     driver-class-name: org.postgresql.Driver
   jpa:

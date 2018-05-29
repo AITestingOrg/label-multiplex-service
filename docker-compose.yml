@@ -17,8 +17,8 @@ services:
     restart: always
     environment:
       POSTGRES_DB: 'labels'
-      POSTGRES_PASSWORD: "postgres"
-      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "test"
+      POSTGRES_USER: "test"
       PGDATA: ./postgres-data
     ports:
       - '5432:5432'
