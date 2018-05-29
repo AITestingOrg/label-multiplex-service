@@ -3,7 +3,7 @@ package org.aist.aide.labelmultiplexer.service.controllers;
 import java.util.List;
 import javax.validation.ValidationException;
 
-import org.aist.aide.labelmultiplexer.domain.exceptions.NotFoundException;
+import org.aist.aide.formexpert.common.exceptions.NotFoundException;
 import org.aist.aide.labelmultiplexer.domain.models.Label;
 import org.aist.aide.labelmultiplexer.domain.services.CrudLabelService;
 import org.springframework.beans.factory.annotation.Autowired;

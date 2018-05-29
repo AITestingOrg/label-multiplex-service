@@ -1,6 +1,6 @@
 package org.aist.aide.labelmultiplexer.service.controllers;
 
-import org.aist.aide.labelmultiplexer.domain.exceptions.NotFoundException;
+import org.aist.aide.formexpert.common.exceptions.NotFoundException;
 import org.aist.aide.labelmultiplexer.domain.models.InLabel;
 import org.aist.aide.labelmultiplexer.domain.services.InLabelService;
 import org.springframework.beans.factory.annotation.Autowired;
