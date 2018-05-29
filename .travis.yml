@@ -1,13 +1,18 @@
 language: java
 sudo: required
+dist: trusty
 before_install:
 - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
-install: ". ./install-jdk.sh -F 10 -L GPL"
+matrix:
+  include:
+  - env: JDK='Oracle JDK 10'
+    install: ". ./install-jdk.sh -F 10 -L BCL"
 env:
   global:
   - secure: WLoCzW+M+8kzT83QFIM728Q5vyy3nahIQVvudotrgi9z7zwNvN4G/JauQtvGRErIXR9/Luk93qEhl6EZ+/O4ebDVdTD2Qthtx41mSKupSaIvoew2HWGqWCBoykOzKDBSf83ZW9L/qOWfqG4RYegS359G9VC/JCvR3LzGvWF+pOSuztFvilJHGUpLjwv4A1ZURzmEUfaIg3uj6tccAFXtDspONUqNjn4WhDjE4N8pagLpJdB4i9qxGuWl9qJZbXanC67oQNU+8sm3MDWwNckRC+y17RqPl8znd3B+288iq3ZNnAgbO7lnKTmMnw9Au0kfNBPGTfunpDYKkXQXdGbDmRvYQ6Cbfjq0e/42vdD0SaqkS3/2i2V1Ca35B6RFZR1nOUL2fAfjRe6FK9Uevmg2JQiUxXDSAe3FSwG/hrK1odqNCdhJMSkE1ehfuX4mH6jQ3JP4oV6c8K4X2MrKtnOnAjGy2otDkKB3pHO1D+RG6FvBOfpr2N+c9m8qh/bG5k5Oh4hhsghYlYG/SCz71z+6QLeLu5rKE+jl2qWTn55iifB3Tbeh+ZYqeMLmXHM3pkDy50oCjdkc8pzUkJak5Mv/q60pQsbLSVf/8FZke606CQddbCvtVZc7kMqalxdibbj2nBXQyb9644GMOkqsazj/jyDc/P1CHasrXgd2VXMPs7g=
   - secure: fxIq1S/x8+3mnpsiuf9lYYeHJeTa+ThpTkp6K+4+8QughF7Z6F/g5XbK5oqnVZ2TEPsAsrBZcqXy7Z2ntq6fmSySHiPr79HxMCdT4Br2aCJs0KV4f/j+12B/tAhFxEjUttLvUqC+y9/dTnsPOkmiB2OuBOo4q6pVvvciSkhjVFhr4LhGIWFRNECpJ3O6ETExf4rk/4kFpkRMgdx5HIwhjXqe4HYfikEBXysj+WOgX1Tr9i9kY8CJesYvl5XcUIKusXjFtMd9l8pkiuXZIzWypukVKK2cInd9mGD5KdD/2/YXm4HLJ+IK+/iJbCtPbOzqB/SLQbistJJSLW/fDbvHaYWEn8kIOoy1MfZqz4JnAKdvJuTAE01MKFgDPwHCXLgRb1WNPZD+EPQJqdfJwFFXii6lJ5NsCOLHzFzNr6+SRymcTs4uuGxqEGZWU/tXwAvJSDkD9Htn+xNs0JMWvyBY2Fi+qIsUpBro977HVNn9J+JCb2fm2SpP+NbU6IEoFwKFqfXWrwT0AlSdSBJ8RpfGzOAPf7w0K1vmRIUgl8+FZ7yJ63KRtQCxYfJ6TEKIt/TYPtR5zYCNryIl46eg9AVr8ZI7Oh+7G8lPqXh60tEgZWzHusJMIeMU4fqVxp2PgaoqB0evFR8/pHhma3Qt6BTooWQyo/cefE/EFn4Kkf2i/go=
 after_success:
+- ./gradlew assemble
 - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
 - set +e
 - export REPO=aista/label-multiplex-service
