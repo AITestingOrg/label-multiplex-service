@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    include: default
   datasource:
     url: jdbc:postgresql://localhost:5432/labels
     username: test
