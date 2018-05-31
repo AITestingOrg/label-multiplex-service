@@ -2,7 +2,7 @@ spring:
   profiles:
     include: default
   datasource:
-    url: jdbc:postgresql://localhost:5432/labels
+    url: jdbc:postgresql://postgres:5432/labels
     username: postgres
     password: postgres
     platform: POSTGRESQL
