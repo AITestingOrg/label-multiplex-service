@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 @Entity
 @Table(name = "in_label")
 public class InLabel extends Label {
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "out_label_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private OutLabel label;

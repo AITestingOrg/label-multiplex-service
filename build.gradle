@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-        springBootVersion = '2.0.1.RELEASE'
+        springBootVersion = '2.0.2.RELEASE'
         orgAspectjVerision = '1.9.1'
 	}
 	repositories {
@@ -42,6 +42,7 @@ dependencies {
     compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
     compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix')
     compile('org.springframework.cloud:spring-cloud-starter-netflix-ribbon')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
     compile "org.springframework.boot:spring-boot-starter-data-rest:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-starter-cloud-connectors:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}"
