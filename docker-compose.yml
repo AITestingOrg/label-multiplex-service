@@ -22,8 +22,10 @@ services:
       PGDATA: ./postgres-data
     ports:
       - '5432:5432'
-    volumes:
-      - ./db_volume:/var/lib/postgresql
+    volumes_from:
+        - data
+      volumes:
+        - ./db/seed.sql:/docker-entrypoint-initdb.d/seed.sq
 
   discoveryservice:
     image: springcloud/eureka
