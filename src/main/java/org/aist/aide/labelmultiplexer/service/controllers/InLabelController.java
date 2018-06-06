@@ -1,5 +1,7 @@
 package org.aist.aide.labelmultiplexer.service.controllers;
 
+import java.util.List;
+import javax.validation.ValidationException;
 import org.aist.aide.formexpert.common.exceptions.NotFoundException;
 import org.aist.aide.labelmultiplexer.domain.models.InLabel;
 import org.aist.aide.labelmultiplexer.domain.services.InLabelService;
@@ -7,9 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.ValidationException;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")

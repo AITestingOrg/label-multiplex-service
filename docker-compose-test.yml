@@ -1,17 +1,6 @@
 version: "3"
 
 services:
-  labelmultiplexservice:
-    build: ./
-    volumes:
-      - ./src:/usr/src/app
-    ports:
-      - '8080:8080'
-    links:
-      - postgres
-    depends_on:
-      - postgres
-
   postgres:
     image: postgres
     restart: always
@@ -25,8 +14,6 @@ services:
     volumes:
       - ./db_volume:/var/lib/postgresql
       - ./db/seed.sql:/docker-entrypoint-initdb.d/seed.sql
-
-
   discoveryservice:
     image: springcloud/eureka
     ports:

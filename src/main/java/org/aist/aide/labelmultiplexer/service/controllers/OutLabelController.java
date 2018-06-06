@@ -1,7 +1,9 @@
 package org.aist.aide.labelmultiplexer.service.controllers;
 
+import java.util.List;
+import javax.validation.ValidationException;
+
 import org.aist.aide.formexpert.common.exceptions.NotFoundException;
-import org.aist.aide.labelmultiplexer.domain.models.InLabel;
 import org.aist.aide.labelmultiplexer.domain.models.OutLabel;
 import org.aist.aide.labelmultiplexer.domain.services.OutLabelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,16 +11,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.ValidationException;
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/v1/out-label")
 public class OutLabelController {
     private OutLabelService crudLabelService;
+
     public OutLabelController(@Autowired OutLabelService outLabelService) {
         this.crudLabelService = outLabelService;
     }
+
     @RequestMapping("/")
     public ResponseEntity<List<OutLabel>> getAll() {
         return new ResponseEntity<>(crudLabelService.getAll(), HttpStatus.OK);
